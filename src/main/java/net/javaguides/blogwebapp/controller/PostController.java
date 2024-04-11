@@ -1,7 +1,9 @@
 package net.javaguides.blogwebapp.controller;
 
 import jakarta.validation.Valid;
+import net.javaguides.blogwebapp.dto.CommentDto;
 import net.javaguides.blogwebapp.dto.PostDto;
+import net.javaguides.blogwebapp.service.CommentService;
 import net.javaguides.blogwebapp.service.PostService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,9 +17,10 @@ import java.util.List;
 @Controller
 public class PostController {
     private PostService postService;//use interface for injecting dependency for loose coupling
+    private CommentService commentService;
 
-    public PostController(PostService postService) {
-        this.postService = postService;
+    public PostController(PostService postService, CommentService commentService) {
+        this.postService = postService;this.commentService= commentService;
     }
 
     //private static final Logger logger = LoggerFactory.getLogger(PostController.class); for debug
@@ -36,6 +39,14 @@ public class PostController {
         PostDto postDto = new PostDto();
         model.addAttribute("post",postDto);
         return "/admin/create_post";
+    }
+
+    @GetMapping("/admin/posts/comments")
+    public String postComments(Model model){
+        List<CommentDto> comments = commentService.findAllComments();
+        model.addAttribute("comments",comments);
+        return "/admin/comments";
+
     }
 
     //handler to handle form submit request
@@ -100,6 +111,15 @@ public class PostController {
         List<PostDto> posts = postService.searchPosts(query);
         model.addAttribute("posts",posts);
         return "/admin/posts";
+    }
+
+    //delete comment request
+    @GetMapping("/admin/posts/comments/{commentId}")
+    public String deleteComment(@PathVariable("commentId")Long commentId){
+        commentService.deleteComment(commentId);
+        return "redirect:/admin/posts/comments";
+
+
     }
 
 

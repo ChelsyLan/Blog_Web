@@ -14,4 +14,8 @@ public interface CommentService {
 
     void createComment(String postUrl,CommentDto commentDto);
 
+    void deleteComment(Long commentId);
+
+
+
 }

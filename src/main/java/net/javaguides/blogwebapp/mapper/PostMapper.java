@@ -6,6 +6,8 @@ package net.javaguides.blogwebapp.mapper;
 import net.javaguides.blogwebapp.dto.PostDto;
 import net.javaguides.blogwebapp.entity.*;
 
+import java.util.stream.Collectors;
+
 public class PostMapper {
 
     /*
@@ -22,6 +24,7 @@ public class PostMapper {
                 content(post.getContent()).
                 shortDescription(post.getShortDescription()).
                 createdOn(post.getCreatedOn()).
+                comments(post.getComments().stream().map(CommentMapper::mapToCommentDto).collect(Collectors.toSet())).
                 updatedOn(post.getUpdatedOn()).build();
     }
 
@@ -33,6 +36,7 @@ public class PostMapper {
                 content(postDto.getContent()).
                 shortDescription(postDto.getShortDescription()).
                 title(postDto.getTitle()).
+                comments(postDto.getComments().stream().map(CommentMapper::mapToComment).collect(Collectors.toSet())).
                 createdOn(postDto.getCreatedOn()).
                 updatedOn(postDto.getUpdatedOn()).build();
     }
