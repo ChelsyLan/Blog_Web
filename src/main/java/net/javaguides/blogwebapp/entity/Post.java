@@ -38,4 +38,8 @@ public class Post {
     @OneToMany(mappedBy = "post",cascade = CascadeType.REMOVE)
     private Set<Comment> comments = new HashSet<>();
 
+    @ManyToOne
+    @JoinColumn(name = "created_by",nullable = false)//name of foreign key column
+    private User createdBy;
+
 }

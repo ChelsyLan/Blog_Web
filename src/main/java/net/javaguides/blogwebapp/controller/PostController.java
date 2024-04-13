@@ -56,6 +56,7 @@ public class PostController {
     public String createPost(@Valid @ModelAttribute("post") PostDto postDto, BindingResult result,Model model){
         postDto.setUrl(getUrl(postDto.getTitle()));
         if(result.hasErrors()){
+            //preserve the data when some columns are empty so that users don't need to enter again
             model.addAttribute("post",postDto);
             return "/admin/create_post";
         }

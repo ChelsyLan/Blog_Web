@@ -36,7 +36,6 @@ public class PostMapper {
                 content(postDto.getContent()).
                 shortDescription(postDto.getShortDescription()).
                 title(postDto.getTitle()).
-                comments(postDto.getComments().stream().map(CommentMapper::mapToComment).collect(Collectors.toSet())).
                 createdOn(postDto.getCreatedOn()).
                 updatedOn(postDto.getUpdatedOn()).build();
     }
