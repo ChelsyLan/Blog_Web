@@ -49,7 +49,10 @@ public class PostServiceImpl implements PostService {
 
     @Override
     public void updatePost(PostDto postDto) {
+        String email = SecurityUtils.getCurrentUser().getUsername();
+        User user = userRepository.findByEmail(email);
         Post post=PostMapper.mapToPostEntity(postDto);
+        post.setCreatedBy(user);
         postRepository.save(post);
 
     }
@@ -68,6 +71,15 @@ public class PostServiceImpl implements PostService {
     public List<PostDto> searchPosts(String query) {
         return postRepository.searchPosts(query).
                 stream().map(PostMapper::mapToPostDto).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<PostDto> findPostsByUser() {
+        String email = SecurityUtils.getCurrentUser().getUsername();
+        User createdBy = userRepository.findByEmail(email);
+        Long userId = createdBy.getId();
+        List<Post> posts = postRepository.findPostsByUser(userId);
+        return posts.stream().map(PostMapper::mapToPostDto).collect(Collectors.toList());
     }
 
 
