@@ -1,9 +1,6 @@
 <!doctype html>
 <html lang="en"
-      xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
-      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
- >
+      xmlns:th="http://www.thymeleaf.org">
 
 <head th:fragment="header">
     <meta charset="UTF-8">
@@ -31,18 +28,14 @@
                 <li class="nav-item">
                     <a class="nav-link active" aria-current="page" th:href="@{/register}">Register</a>
                 </li>
-<!--                <li class="nav-item">-->
-<!--                    <a class="nav-link active" aria-current="page" th:href="@{/login}">Login</a>-->
-<!--                </li>-->
                 <li class="nav-item">
                     <a class="nav-link active" aria-current="page" th:href="@{/login}">Login</a>
                 </li>
+
             </ul>
-
-
         </div>
     </div>
 </nav>
 
 </body>
-</>
+</html>

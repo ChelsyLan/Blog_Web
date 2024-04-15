@@ -5,8 +5,6 @@ import net.javaguides.blogwebapp.dto.CommentDto;
 import net.javaguides.blogwebapp.dto.PostDto;
 import net.javaguides.blogwebapp.service.CommentService;
 import net.javaguides.blogwebapp.service.PostService;
-import net.javaguides.blogwebapp.util.ROLE;
-import net.javaguides.blogwebapp.util.SecurityUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -31,14 +29,7 @@ public class PostController {
     //create handler method,handle GET request,return model and view
     @GetMapping("/admin/posts")
     public String posts(Model model){
-        String role = SecurityUtils.getRoles();
-        List<PostDto> posts= null;
-        if(ROLE.ROLE_ADMIN.name().equals(role)){
-            posts = postService.findAllPosts();
-        }else{
-            posts = postService.findPostsByUser();
-        }
-
+        List<PostDto> posts = postService.findAllPosts();
         model.addAttribute("posts",posts);//use the key to get value in thymeleaf template
         return "/admin/posts";
     }
@@ -52,13 +43,7 @@ public class PostController {
 
     @GetMapping("/admin/posts/comments")
     public String postComments(Model model){
-        String role = SecurityUtils.getRoles();
-        List<CommentDto> comments = null;
-        if(ROLE.ROLE_ADMIN.name().equals(role)){
-            comments = commentService.findAllComments();
-        }else{
-            comments = commentService.findCommentsByPost();
-        }
+        List<CommentDto> comments = commentService.findAllComments();
         model.addAttribute("comments",comments);
         return "/admin/comments";
 
