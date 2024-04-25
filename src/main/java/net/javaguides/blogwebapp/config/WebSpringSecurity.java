@@ -55,5 +55,5 @@ public class WebSpringSecurity {
                 .passwordEncoder(passwordEncoder());
     }
 
-    //only admin user can get to /admin
+
 }
