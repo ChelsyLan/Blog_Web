@@ -7,10 +7,10 @@ a blog web application,where users can create and manage their posts
 - manage posts as admin
 
 # Built With
-Spring Boot - the framework for backend
-Thymeleaf - engine template
-Bootstrap - UI/UX template
-MariaDB - Database management system
+- Spring Boot - the framework for backend
+- Thymeleaf - engine template
+- Bootstrap - UI/UX template
+- MariaDB - Database management system
 
 # Installation
 1. clone the project from GitHub
